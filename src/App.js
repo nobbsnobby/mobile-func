@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     overscroll-behavior: contain;
     color: white;
+    background-color: black;
   }
 
   #root {
