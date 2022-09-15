@@ -1,30 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
-import {Helmet} from "react-helmet";
+import HelmetBase from "./components/HelmetBase/HelmetBase";
+import Content from "./components/Content/Content";
+import {useState, useEffect, createContext, useMemo} from "react";
+import Modal from "./components/Modal";
+import styled, { createGlobalStyle } from "styled-components";
+import ModalContent from "./components/Modal/ModalContent";
+import BaseLayout from "./components/BaseLayout/BaseLayout";
+import NavBar from "./components/TabBar";
+
+// fix zoom
+const GlobalStyle = createGlobalStyle`
+  body {
+    touch-action: pan-y pan-x;
+    overflow: hidden;
+    height: 100vh;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: contain;
+    color: white;
+  }
+
+  #root {
+    height: 100%;
+  }
+  
+  // additional fix for apple devices
+  @supports (-webkit-touch-callout: none) {
+    body, #root {
+      min-height: -webkit-fill-available;
+    }
+  }
+`;
+
+export const ModalContext = createContext({
+  isOpen: false,
+  setOpenStatus: () => {}
+});
+const ModalContextProvider = ModalContext.Provider
 
 function App() {
+
+  const [isOpen, setOpenStatus] = useState(false)
+  const themeModalContext = useMemo(
+      () => ({
+        isOpen,
+        setOpenStatus
+      }),
+      [isOpen],
+  );
+
   return (
-    <div className="App">
-      <Helmet>
-        <title>My Title</title>
-        <meta name="theme-color" content="red" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      </Helmet>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HelmetBase />
+      <GlobalStyle />
+      <ModalContextProvider value={themeModalContext}>
+        <BaseLayout>
+          <Content />
+          <NavBar />
+        </BaseLayout>
+        <Modal />
+      </ModalContextProvider>
+    </>
   );
 }
 
