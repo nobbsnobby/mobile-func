@@ -1,0 +1,10 @@
+{
+  "feedItems": [
+    { "id": 1, "type": "video", "url": "https://streamable.com/ifjh" },
+    { "id": 2, "type": "stream", "url": "https://streamable.com/moo" },
+    { "id": 3, "type": "video", "url": "https://streamable.com/ifjh" },
+    { "id": 4, "type": "audio", "url": "https://streamable.com/moo" },
+    { "id": 5, "type": "stream", "url": "https://streamable.com/ifjh" },
+    { "id": 6, "type": "audio", "url": "https://streamable.com/moo" }
+  ]
+}
