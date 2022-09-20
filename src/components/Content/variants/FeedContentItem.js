@@ -7,6 +7,7 @@ import {FeedPlayerContext} from "./FeedContent";
 const FeedContentItem = ({id, type, url}) => {
   //state
   const slideData = useSwiperSlide();
+  const {isEnd, realIndex} = useSwiper();
   const [playing, setPlaying] = useState(false);
   const {isMuted, setMutedState} = useContext(FeedPlayerContext);
 
